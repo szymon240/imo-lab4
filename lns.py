@@ -5,17 +5,7 @@ from weighted_regret_heuristic import weighted_regret_heuristic
 
 
 def large_neighborhood_search(distance_matrix, cycle1, cycle2, max_time, destroy_ratio):
-    """
-    Large Neighborhood Search (LNS):
-    - Start from provided cycles.
-    - Optional: local_search.steepest_original on start.
-    - Repeat until time limit:
-        * y := x
-        * Destroy: usuń p% wierzchołków/krawędzi
-        * Repair: napraw pustki heurystyką regret
-        * Optional: local search on y
-        * If f(y) < f(x) then x := y
-    """
+
     print(f"[LNS] Starting LNS with time limit={max_time:.2f}s, destroy ratio={destroy_ratio*100:.0f}%...")
     # 1) Initial optional local search
     (x1, x2), best_length, ls_time = local_search.steepest_original(distance_matrix, cycle1.copy(), cycle2.copy())
@@ -76,7 +66,6 @@ def destroy_solution(cycle1, cycle2, ratio):
 
 
 def repair_solution(distance_matrix, cycle1, cycle2, removed_nodes):
-    # Repair using weighted regret heuristic
     # Przywracamy usunięte wierzchołki i odbudowujemy cykle heurystyką regretową
     # Heurystyka zwraca kompletne dwa cykle, na których pracujemy dalej
     cycle1_full, cycle2_full = weighted_regret_heuristic(distance_matrix)

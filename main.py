@@ -3,6 +3,7 @@ import local_search
 from utils import load_from_tsp
 from msls import multiple_start_local_search
 from ils import iterated_local_search
+from lns import large_neighborhood_search
 
 if __name__ == "__main__":
     kroa200_matrix, kroa200_coords = load_from_tsp('datasets/kroA200.tsp')
@@ -18,6 +19,29 @@ if __name__ == "__main__":
 
     def ils_wrapper(matrix, c1, c2):
         return iterated_local_search(matrix, c1, c2, max_time=40, perturbation_size=3)
+
+
+    def lns_wrapper(matrix, c1, c2):
+        return large_neighborhood_search(matrix, c1, c2, max_time=40, destroy_ratio=0.3)
+
+
+    # 3) LNS: Large Neighborhood Search
+    utils.run_test_lab2(
+        "kroA: LNS (regret repair)",
+        kroa200_matrix,
+        kroa200_coords,
+        kroa200_cycle1_random,
+        kroa200_cycle2_random,
+        lns_wrapper
+    )
+    utils.run_test_lab2(
+        "kroB: LNS (regret repair)",
+        krob200_matrix,
+        krob200_coords,
+        krob200_cycle1_random,
+        krob200_cycle2_random,
+        lns_wrapper
+    )
 
     utils.run_test_lab2(
         "kroA: ILS",

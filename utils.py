@@ -155,7 +155,7 @@ def experiment_lab2(
         cycle2: list[int],
         alg: Callable[[np.ndarray, list[int], list[int], float], tuple[tuple[list[int], list[int]], int, float]],
         min_time: float | None = None,
-        runs=1,
+        runs=10,
         random=True
 ):
     lengths = []

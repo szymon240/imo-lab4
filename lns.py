@@ -2,6 +2,7 @@ import time
 import random
 import local_search
 from weighted_regret_heuristic import weighted_regret_heuristic
+from utils import calculate_regret, cycle_length
 
 
 def large_neighborhood_search(distance_matrix, cycle1, cycle2, max_time, destroy_ratio):
@@ -19,7 +20,7 @@ def large_neighborhood_search(distance_matrix, cycle1, cycle2, max_time, destroy
         if elapsed >= max_time:
             break
         iter_count += 1
-        print(f"[LNS] Iteration {iter_count}: elapsed {elapsed:.2f}s")
+        #print(f"[LNS] Iteration {iter_count}: elapsed {elapsed:.2f}s")
 
         # Copy current best
         y1, y2 = best_cycles[0].copy(), best_cycles[1].copy()
@@ -27,26 +28,26 @@ def large_neighborhood_search(distance_matrix, cycle1, cycle2, max_time, destroy
         # Destroy: usuń ~destroy_ratio wierzchołków
         t0 = time.time()
         y1, y2, removed = destroy_solution(y1, y2, destroy_ratio)
-        print(f"[LNS] Destroy: removed {len(removed)} nodes in {time.time()-t0:.2f}s")
+        #print(f"[LNS] Destroy: removed {len(removed)} nodes in {time.time()-t0:.2f}s")
 
         # Repair: wstaw brakujace wierzcholki heurystyką
         t1 = time.time()
         y1, y2 = repair_solution(distance_matrix, y1, y2, removed)
-        print(f"[LNS] Repair: reinserted nodes in {time.time()-t1:.2f}s")
+        #print(f"[LNS] Repair: reinserted nodes in {time.time()-t1:.2f}s")
 
         # Optional: local search on repaired solution
         t2 = time.time()
         (y1, y2), y_length, _ = local_search.steepest_original(distance_matrix, y1, y2)
-        print(f"[LNS] LS on repaired: Length = {y_length:.2f}, time = {time.time()-t2:.2f}s")
+        #print(f"[LNS] LS on repaired: Length = {y_length:.2f}, time = {time.time()-t2:.2f}s")
 
         # Acceptance
         if y_length < best_length:
             best_length = y_length
             best_cycles = (y1, y2)
-            print(f"[LNS] New best at iter {iter_count}: Length = {best_length:.2f}")
+            #print(f"[LNS] New best at iter {iter_count}: Length = {best_length:.2f}")
 
     total = time.time() - start_time
-    print(f"[LNS] Finished LNS after {iter_count} iterations, time = {total:.2f}s, best length = {best_length:.2f}")
+    #print(f"[LNS] Finished LNS after {iter_count} iterations, time = {total:.2f}s, best length = {best_length:.2f}")
     return best_cycles, best_length, total
 
 
@@ -66,7 +67,26 @@ def destroy_solution(cycle1, cycle2, ratio):
 
 
 def repair_solution(distance_matrix, cycle1, cycle2, removed_nodes):
-    # Przywracamy usunięte wierzchołki i odbudowujemy cykle heurystyką regretową
-    # Heurystyka zwraca kompletne dwa cykle, na których pracujemy dalej
-    cycle1_full, cycle2_full = weighted_regret_heuristic(distance_matrix)
-    return cycle1_full, cycle2_full
+    """
+    Naprawia rozwiązanie po fazie "destroy" za pomocą heurystyki 2-żal.
+    """
+    # Przywracamy usunięte wierzchołki do cykli w kolejności malejącego żalu
+    for node in removed_nodes:
+        # Oblicz żal dla wstawienia wierzchołka do cyklu 1
+        regret1, increase1, pos1 = calculate_regret(distance_matrix, cycle1, node)
+        # Oblicz żal dla wstawienia wierzchołka do cyklu 2
+        regret2, increase2, pos2 = calculate_regret(distance_matrix, cycle2, node)
+
+        # Wybierz cykl z większym żalem (lub mniejszym wzrostem długości w przypadku remisu)
+        if regret1 > regret2 or (regret1 == regret2 and increase1 < increase2):
+            cycle1.insert(pos1, node)
+        else:
+            cycle2.insert(pos2, node)
+
+    # Zamknij cykle, jeśli nie są zamknięte
+    if cycle1[-1] != cycle1[0]:
+        cycle1.append(cycle1[0])
+    if cycle2[-1] != cycle2[0]:
+        cycle2.append(cycle2[0])
+
+    return cycle1, cycle2

@@ -18,12 +18,47 @@ if __name__ == "__main__":
 
 
     def ils_wrapper(matrix, c1, c2):
-        return iterated_local_search(matrix, c1, c2, max_time=40, perturbation_size=3)
+        return iterated_local_search(matrix, c1, c2, max_time=65, perturbation_size=3)
 
 
     def lns_wrapper(matrix, c1, c2):
-        return large_neighborhood_search(matrix, c1, c2, max_time=40, destroy_ratio=0.3)
+        return large_neighborhood_search(matrix, c1, c2, max_time=65, destroy_ratio=0.3)
 
+    # 1) MSLS: Multiple Start Local Search (10 uruchomień, każdorazowo 200 startów LS)
+    utils.run_test_lab2(
+        "kroA: MSLS (200 starts)",
+        kroa200_matrix,
+        kroa200_coords,
+        kroa200_cycle1_random,
+        kroa200_cycle2_random,
+        msls_wrapper
+    )
+    utils.run_test_lab2(
+        "kroB: MSLS (200 starts)",
+        krob200_matrix,
+        krob200_coords,
+        krob200_cycle1_random,
+        krob200_cycle2_random,
+        msls_wrapper
+    )
+
+    # # 2) Steepest descent (oryginalne przeszukiwanie lokalne)
+    # utils.run_test_lab2(
+    #     "kroA: Steepest search (original)",
+    #     kroa200_matrix,
+    #     kroa200_coords,
+    #     kroa200_cycle1_random,
+    #     kroa200_cycle2_random,
+    #     local_search.steepest_original
+    # )
+    # utils.run_test_lab2(
+    #     "kroB: Steepest search (original)",
+    #     krob200_matrix,
+    #     krob200_coords,
+    #     krob200_cycle1_random,
+    #     krob200_cycle2_random,
+    #     local_search.steepest_original
+    # )
 
     # 3) LNS: Large Neighborhood Search
     utils.run_test_lab2(
@@ -59,40 +94,4 @@ if __name__ == "__main__":
         krob200_cycle1_random,
         krob200_cycle2_random,
         ils_wrapper
-    )
-
-    # 1) MSLS: Multiple Start Local Search (10 uruchomień, każdorazowo 200 startów LS)
-    utils.run_test_lab2(
-        "kroA: MSLS (200 starts)",
-        kroa200_matrix,
-        kroa200_coords,
-        kroa200_cycle1_random,
-        kroa200_cycle2_random,
-        msls_wrapper
-    )
-    utils.run_test_lab2(
-        "kroB: MSLS (200 starts)",
-        krob200_matrix,
-        krob200_coords,
-        krob200_cycle1_random,
-        krob200_cycle2_random,
-        msls_wrapper
-    )
-
-    # 2) Steepest descent (oryginalne przeszukiwanie lokalne)
-    utils.run_test_lab2(
-        "kroA: Steepest search (original)",
-        kroa200_matrix,
-        kroa200_coords,
-        kroa200_cycle1_random,
-        kroa200_cycle2_random,
-        local_search.steepest_original
-    )
-    utils.run_test_lab2(
-        "kroB: Steepest search (original)",
-        krob200_matrix,
-        krob200_coords,
-        krob200_cycle1_random,
-        krob200_cycle2_random,
-        local_search.steepest_original
     )

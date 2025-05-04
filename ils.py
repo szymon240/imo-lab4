@@ -20,7 +20,7 @@ def iterated_local_search(distance_matrix, cycle1, cycle2, max_time, perturbatio
         if elapsed >= max_time:
             break
         iter_count += 1
-        print(f"[ILS] Iteration {iter_count}: elapsed {elapsed:.2f}s")
+        #print(f"[ILS] Iteration {iter_count}: elapsed {elapsed:.2f}s")
 
         # Kopia
         y1 = best_cycles[0].copy()
@@ -29,20 +29,20 @@ def iterated_local_search(distance_matrix, cycle1, cycle2, max_time, perturbatio
         # Perturbacja
         t0 = time.time()
         y1, y2 = perturb_solution(y1, y2, distance_matrix, perturbation_size)
-        print(f"[ILS] Perturb done (k={perturbation_size}) in {time.time()-t0:.2f}s")
+        #print(f"[ILS] Perturb done (k={perturbation_size}) in {time.time()-t0:.2f}s")
 
         # LS
         t1 = time.time()
         (new1, new2), new_length, _ = local_search.steepest_original(distance_matrix, y1, y2)
-        print(f"[ILS] LS on perturbed: Length = {new_length:.2f}, time = {time.time()-t1:.2f}s")
+        #print(f"[ILS] LS on perturbed: Length = {new_length:.2f}, time = {time.time()-t1:.2f}s")
 
         # Akceptacja
         if new_length < best_length:
             best_length = new_length
             best_cycles = (new1, new2)
-            print(f"[ILS] New best at iter {iter_count}: Length = {best_length:.2f}")
+            #print(f"[ILS] New best at iter {iter_count}: Length = {best_length:.2f}")
     total = time.time() - start_time
-    print(f"[ILS] Finished ILS after {iter_count} iterations, time = {total:.2f}s, best length = {best_length:.2f}")
+    #print(f"[ILS] Finished ILS after {iter_count} iterations, time = {total:.2f}s, best length = {best_length:.2f}")
     return best_cycles, best_length, total
 
 

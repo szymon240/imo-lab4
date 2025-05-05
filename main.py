@@ -13,7 +13,7 @@ if __name__ == "__main__":
     krob200_cycle1_random, krob200_cycle2_random, _ = utils.initialize_random_cycles(krob200_matrix)
 
     def msls_wrapper(matrix, cycle1, cycle2):
-        best_cycles, best_length, total_time = multiple_start_local_search(matrix, num_starts=5)
+        best_cycles, best_length, total_time = multiple_start_local_search(matrix, num_starts=200)
         return best_cycles, best_length, total_time
 
 
@@ -61,37 +61,37 @@ if __name__ == "__main__":
     # )
 
     # 3) LNS: Large Neighborhood Search
-    utils.run_test_lab2(
-        "kroA: LNS (regret repair)",
-        kroa200_matrix,
-        kroa200_coords,
-        kroa200_cycle1_random,
-        kroa200_cycle2_random,
-        lns_wrapper
-    )
-    utils.run_test_lab2(
-        "kroB: LNS (regret repair)",
-        krob200_matrix,
-        krob200_coords,
-        krob200_cycle1_random,
-        krob200_cycle2_random,
-        lns_wrapper
-    )
+    # utils.run_test_lab2(
+    #     "kroA: LNS (regret repair)",
+    #     kroa200_matrix,
+    #     kroa200_coords,
+    #     kroa200_cycle1_random,
+    #     kroa200_cycle2_random,
+    #     lns_wrapper
+    # )
+    # utils.run_test_lab2(
+    #     "kroB: LNS (regret repair)",
+    #     krob200_matrix,
+    #     krob200_coords,
+    #     krob200_cycle1_random,
+    #     krob200_cycle2_random,
+    #     lns_wrapper
+    # )
 
-    utils.run_test_lab2(
-        "kroA: ILS",
-        kroa200_matrix,
-        kroa200_coords,
-        kroa200_cycle1_random,
-        kroa200_cycle2_random,
-        ils_wrapper
-    )
+    # utils.run_test_lab2(
+    #     "kroA: ILS",
+    #     kroa200_matrix,
+    #     kroa200_coords,
+    #     kroa200_cycle1_random,
+    #     kroa200_cycle2_random,
+    #     ils_wrapper
+    # )
 
-    utils.run_test_lab2(
-        "kroB: ILS",
-        krob200_matrix,
-        krob200_coords,
-        krob200_cycle1_random,
-        krob200_cycle2_random,
-        ils_wrapper
-    )
+    # utils.run_test_lab2(
+    #     "kroB: ILS",
+    #     krob200_matrix,
+    #     krob200_coords,
+    #     krob200_cycle1_random,
+    #     krob200_cycle2_random,
+    #     ils_wrapper
+    # )

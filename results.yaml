@@ -1,53 +1,53 @@
 kroA: MSLS (200 starts):
-Initial solution length: 341297
-Average solution length: 38274.0
-Best solution length: 38274
-Worst solution length: 38274
-Average execution time: 67.3196 seconds
-Best execution time: 67.3196 seconds
-Worst execution time: 67.3196 seconds
+Initial solution length: 353001
+Average solution length: 38955.0
+Best solution length: 37460
+Worst solution length: 40262
+Average execution time: 69.1989 seconds
+Best execution time: 66.2949 seconds
+Worst execution time: 71.5084 seconds
 
 kroB: MSLS (200 starts):
-Initial solution length: 348703
-Average solution length: 38986.0
-Best solution length: 38986
-Worst solution length: 38986
-Average execution time: 65.4971 seconds
-Best execution time: 65.4971 seconds
-Worst execution time: 65.4971 seconds
+Initial solution length: 337979
+Average solution length: 39040.8
+Best solution length: 37948
+Worst solution length: 40231
+Average execution time: 69.0034 seconds
+Best execution time: 67.7868 seconds
+Worst execution time: 71.4420 seconds
 
 kroA: LNS (regret repair):
-Initial solution length: 366784
-Average solution length: 37526.0
-Best solution length: 37526
-Worst solution length: 37526
-Average execution time: 65.3449 seconds
-Best execution time: 65.3449 seconds
-Worst execution time: 65.3449 seconds
+Initial solution length: 353001
+Average solution length: 36342.6
+Best solution length: 35766
+Worst solution length: 37240
+Average execution time: 65.6422 seconds
+Best execution time: 65.0317 seconds
+Worst execution time: 66.3973 seconds
 
 kroB: LNS (regret repair):
-Initial solution length: 344518
-Average solution length: 36702.0
-Best solution length: 36702
-Worst solution length: 36702
-Average execution time: 65.0379 seconds
-Best execution time: 65.0379 seconds
-Worst execution time: 65.0379 seconds
+Initial solution length: 337979
+Average solution length: 36711.6
+Best solution length: 35806
+Worst solution length: 37706
+Average execution time: 65.7456 seconds
+Best execution time: 65.0849 seconds
+Worst execution time: 66.2964 seconds
 
 kroA: ILS:
-Initial solution length: 329134
-Average solution length: 39099.0
-Best solution length: 39099
-Worst solution length: 39099
-Average execution time: 65.2040 seconds
-Best execution time: 65.2040 seconds
-Worst execution time: 65.2040 seconds
+Initial solution length: 353001
+Average solution length: 39401.7
+Best solution length: 37929
+Worst solution length: 40579
+Average execution time: 65.2790 seconds
+Best execution time: 65.0241 seconds
+Worst execution time: 65.4916 seconds
 
 kroB: ILS:
-Initial solution length: 320041
-Average solution length: 39068.0
-Best solution length: 39068
-Worst solution length: 39068
-Average execution time: 65.3413 seconds
-Best execution time: 65.3413 seconds
-Worst execution time: 65.3413 seconds
+Initial solution length: 337979
+Average solution length: 38629.3
+Best solution length: 37523
+Worst solution length: 40398
+Average execution time: 65.2531 seconds
+Best execution time: 65.0003 seconds
+Worst execution time: 65.4887 seconds
